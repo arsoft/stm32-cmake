@@ -6,7 +6,8 @@ This project is used to develop applications for the STM32 - ST's ARM Cortex-Mx 
 
 * cmake >= 3.0
 * GCC toolchain with newlib (optional).
-* STM32CubeMX package for STM32F0, STM32F1, STM32F2, STM32F3, STM32F4, STM32F7, STM32H7, STM32L0, STM32L1, STM32L4 families.
+
+* STM32CubeMX package for STM32F0, STM32F1, STM32F2, STM32F3, STM32F4, STM32F7, STM32G0, STM32H7, STM32L0, STM32L1, STM32L4 families.
 
 ## Project contains
 
@@ -22,6 +23,16 @@ This project is used to develop applications for the STM32 - ST's ARM Cortex-Mx 
 * `stm32-blinky` - blink LED using timers and PWM.
 * `stm32-newlib` - show date using uart and libc functions from newlib.
 * `stm32-chibios` - blink led using ChibiOS/NIL.
+* `stm32-hal-freertos-uart-tensorflow` - HAL OS (FreeRTOS) example using UART 
+    and TensorFlow Lite Micro to perform sine wave interpolation with
+    `flash` (`st-flash`) and `debug` (`openocd` +  `gdb`) targets.
+
+    Requires `OPENOCD_BOARD` to be set to specify the openocd config required.
+    These are usually found in `/usr/share/openocd/scripts/`. For example a
+    STM32F41G_EVAL board using an ST-link would use `OPENOCD_BOARD=board/stm3241g_eval_stlink.cfg`.
+    If none is given CMake will search the project root for `.cfg` files.
+
+    Can be found in a maintained form [here](https://github.com/alxhoff/STM3240G-EVAL-TensorFlow-Hello-World).
 
 # Usage
 
@@ -32,7 +43,7 @@ First of all you need to configure toolchain and libraries, you can do this by e
 * `TOOLCHAIN_PREFIX` - where toolchain is located, **default**: `/usr`
 * `TARGET_TRIPLET` - toolchain target triplet, **default**: `arm-none-eabi`
 * `STM32_CHIP` - STM32 device code, e.g. `STM32F407VG` or `STM32F103VG`
-* `STM32_FAMILY` - STM32 family (F0, F1, F4, etc.) currently, F0, F1, F2, F4, F7, H7, L0, L1 and L4 families are supported. **Note:** If `STM32_CHIP` variable is set, `STM32_FAMILY` is optional.
+* `STM32_FAMILY` - STM32 family (F0, F1, F4, etc.) currently, F0, F1, F2, F4, F7, G0, H7, L0, L1 and L4 families are supported. **Note:** If `STM32_CHIP` variable is set, `STM32_FAMILY` is optional.
 * `STM32Cube_DIR` - path to STM32CubeMX directory **default**: `/opt/STM32Cube_FW_F0_V1.4.0 /opt/STM32Cube_FW_F1_V1.1.0 /opt/STM32Cube_FW_F2_V1.1.0 /opt/STM32Cube_FW_F4_V1.6.0`
 
 To use the toolchain, you'll need to copy contents of the `cmake` folder into cmake's modules path, or use the `CMAKE_MODULE_PATH` variable.
